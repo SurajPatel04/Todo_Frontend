@@ -21,7 +21,11 @@ function Todo() {
           Todo: "Create HTML startucture",
           Last_Date: "11/01/2004",
         },
-        obj12: { Todo: "Style with CSS", Last_Date: "11/02/2004" },
+        oobj12: { Todo: "Style with CSS", Last_Date: "11/02/2004" },
+        obj13: { Todo: "Style with CSS", Last_Date: "11/02/2004" },
+        obj14: { Todo: "Style with CSS", Last_Date: "11/02/2004" },
+        obj16: { Todo: "Style with CSS", Last_Date: "11/02/2004" },
+        obj15: { Todo: "Style with CSS", Last_Date: "11/02/2004" },
       },
     },
     {
@@ -90,21 +94,23 @@ function Todo() {
 
             {/* Subtasks */}
             {item.subTodo && Object.keys(item.subTodo).length > 0 ? (
-              <List sx={{ pl: 8 }}>
-                {Object.values(item.subTodo).map((sub, idx) => (
-                  <ListItem key={idx} sx={{ display: "flex", gap: 1 }}>
-                    <Checkbox
-                      size="small"
-                      color="success"
-                      sx={{ color: "white" }}
-                    />
-                    <Typography>{sub.Todo}</Typography>
-                    <Typography variant="body2" color="gray">
-                      | {sub.Last_Date}
-                    </Typography>
-                  </ListItem>
-                ))}
-              </List>
+              <Box sx={{ maxHeight: 150, overflowY: "auto" }}>
+                <List sx={{ pl: 8 }}>
+                  {Object.values(item.subTodo).map((sub, idx) => (
+                    <ListItem key={idx} sx={{ display: "flex", gap: 1 }}>
+                      <Checkbox
+                        size="small"
+                        color="success"
+                        sx={{ color: "white" }}
+                      />
+                      <Typography>{sub.Todo}</Typography>
+                      <Typography variant="body2" color="gray">
+                        | {sub.Last_Date}
+                      </Typography>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
             ) : (
               ""
             )}
