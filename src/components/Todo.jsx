@@ -5,6 +5,7 @@ import {
   List,
   Typography,
   ListItem,
+  Divider,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -94,23 +95,26 @@ function Todo() {
 
             {/* Subtasks */}
             {item.subTodo && Object.keys(item.subTodo).length > 0 ? (
-              <Box sx={{ maxHeight: 150, overflowY: "auto" }}>
-                <List sx={{ pl: 8 }}>
-                  {Object.values(item.subTodo).map((sub, idx) => (
-                    <ListItem key={idx} sx={{ display: "flex", gap: 1 }}>
-                      <Checkbox
-                        size="small"
-                        color="success"
-                        sx={{ color: "white" }}
-                      />
-                      <Typography>{sub.Todo}</Typography>
-                      <Typography variant="body2" color="gray">
-                        | {sub.Last_Date}
-                      </Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
+              <>
+                <Divider sx={{ backgroundColor: "white" }} />
+                <Box sx={{ maxHeight: 150, overflowY: "auto" }}>
+                  <List sx={{ pl: 8 }}>
+                    {Object.values(item.subTodo).map((sub, idx) => (
+                      <ListItem key={idx} sx={{ display: "flex", gap: 1 }}>
+                        <Checkbox
+                          size="small"
+                          color="success"
+                          sx={{ color: "white" }}
+                        />
+                        <Typography>{sub.Todo}</Typography>
+                        <Typography variant="body2" color="gray">
+                          | {sub.Last_Date}
+                        </Typography>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              </>
             ) : (
               ""
             )}
