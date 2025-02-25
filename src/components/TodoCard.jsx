@@ -4,12 +4,27 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
+import dayjs from "dayjs";
 
 function TodoCard(props) {
   // ✅ State to store subtodos
+  const [title, setTitle] = useState("");
+  const [titleDate, setTitleDate] = useState(null);
+  const [subTitle, setSubTitle] = useState("");
+  const [subTitleDate, setSubTitleDate] = useState(null);
   const [subTodos, setSubTodos] = useState([]);
 
   // ✅ Function to add a new sub-todo
+
+  const handleSubtodoChnage = (event) => {
+    setSubTitle(event.target.value);
+    console.log(subTitle);
+  };
+
+  const handleSubtodoChnageDate = (newValue) => {
+    setSubTitleDate(newValue);
+    console.log(subTitleDate);
+  };
   const handleMoreSubTodo = () => {
     setSubTodos([...subTodos, { id: Date.now(), text: "", date: null }]);
   };
@@ -23,6 +38,22 @@ function TodoCard(props) {
   const handleCancel = (id) => {
     console.log(id);
     setSubTodos(subTodos.filter((todo) => todo.id !== id));
+  };
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+    console.log(title);
+  };
+
+  const handleTitleDate = (newValue) => {
+    setTitleDate(dayjs(newValue));
+    console.log(titleDate);
+  };
+
+  const handleCancelTodo = () => {
+    setTitle("");
+    setSubTodos([]);
+    props.handleCancelTodo();
   };
 
   return (
@@ -53,9 +84,17 @@ function TodoCard(props) {
 
           {/* Input Fields */}
           <Box display="flex" gap={2} mb={3}>
-            <TextField label="Todo" fullWidth color="white" />
+            <TextField
+              label="Todo"
+              fullWidth
+              color="white"
+              value={title}
+              onChange={handleTitleChange}
+            />
             <DatePicker
               label="Select Due Date"
+              value={titleDate}
+              onChange={handleTitleDate}
               sx={{
                 width: "100%",
 
@@ -85,10 +124,12 @@ function TodoCard(props) {
               padding: 2,
               boxShadow: "0px 2px 6px rgba(0,0,0,0.2)",
               backdropFilter: "blur(8px)",
+              maxHeight: 225,
+              overflowY: "auto",
             }}
           >
             <Typography color="white" fontSize={16} fontWeight="bold" mb={1}>
-              📌 Subtodo
+              📌 Sub todo
             </Typography>
 
             {/* ✅ Loop through subTodos state and render each sub-todo */}
@@ -100,9 +141,11 @@ function TodoCard(props) {
                   label="Enter Sub Todo"
                   onKeyDown={handleEnterEvent}
                   color="white"
+                  onChange={handleSubtodoChnage}
                 />
                 <DatePicker
                   label="Select Due Date"
+                  onChange={handleSubtodoChnageDate}
                   sx={{
                     width: "100%",
 
@@ -164,7 +207,7 @@ function TodoCard(props) {
                 fontSize: 16,
                 fontWeight: "bold",
               }}
-              onClick={props.handleCancelTodo}
+              onClick={handleCancelTodo}
               startIcon={<CancelIcon />}
             >
               Cancel
