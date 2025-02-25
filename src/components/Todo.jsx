@@ -10,11 +10,11 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { CheckBox } from "@mui/icons-material";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import { useState } from "react";
 
-function Todo() {
+function Todo(props) {
+  const [isVisible, setVisible] = useState(true);
   const obj1 = [
     {
       Todo: "Login Page",
@@ -43,13 +43,13 @@ function Todo() {
   };
   return (
     <>
-      <Box sx={{ width: 1 }}>
+      <Box sx={{ width: 1, display: props.display }}>
         <Button
           sx={{ width: 1 }}
           variant="contained"
           size="large"
           startIcon={<AddIcon />}
-          onClick={AddTask}
+          onClick={props.handleAddTask}
         >
           Add Task
         </Button>
