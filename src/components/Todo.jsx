@@ -11,6 +11,8 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CheckBox } from "@mui/icons-material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 
 function Todo() {
   const obj1 = [
@@ -35,6 +37,10 @@ function Todo() {
       subTodo: {},
     },
   ];
+
+  const AddTask = () => {
+    <Card variant="outlined">{card}</Card>;
+  };
   return (
     <>
       <Box sx={{ width: 1 }}>
@@ -43,6 +49,7 @@ function Todo() {
           variant="contained"
           size="large"
           startIcon={<AddIcon />}
+          onClick={AddTask}
         >
           Add Task
         </Button>
